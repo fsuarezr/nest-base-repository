@@ -1,4 +1,4 @@
-import { registerAs } from "@nestjs/config"
+import { registerAs } from '@nestjs/config'
 
 export default registerAs(`api`, () => {
   const enviroment = process.env.NODE_ENV || `dev`

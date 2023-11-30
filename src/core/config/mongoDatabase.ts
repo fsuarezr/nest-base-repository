@@ -1,4 +1,4 @@
-import { registerAs } from "@nestjs/config"
+import { registerAs } from '@nestjs/config'
 
 export default registerAs(`mongoDatabase`, () => {
   const mongoConn = process.env.MONGODB_CONN

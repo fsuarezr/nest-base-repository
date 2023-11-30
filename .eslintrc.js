@@ -17,11 +17,15 @@ module.exports = {
   },
   ignorePatterns: ['.eslintrc.js'],
   rules: {
-    "prettier/prettier": 
-    [ "error",
-      {
-        "endOfLine": "auto"}
-    ],
+    "prettier/prettier":
+      [
+        'error',
+        {
+          'singleQuote': true,
+          'endOfLine': 'auto',
+          'quoteProps': 'as-needed', // Esto evita que las propiedades de objetos se citen siempre
+        },
+      ],
     "semi": ["error", "never"],
     "quotes": ["error", "backtick"],
     "prefer-template": "error",
