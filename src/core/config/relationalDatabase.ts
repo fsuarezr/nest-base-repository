@@ -1,6 +1,6 @@
 import { registerAs } from '@nestjs/config'
 
-export default registerAs(`pgdb`, () => {
+export default registerAs(`db`, () => {
   const staging = process.env.DB_STAGING
 
   const host = process.env.DB_HOST
@@ -13,6 +13,8 @@ export default registerAs(`pgdb`, () => {
 
   const password = process.env.DB_PASSWORD
 
+  const certificatePath = process.env.DB_CERTIFICATE_PATH
+
   return {
     host,
     port,
@@ -20,5 +22,6 @@ export default registerAs(`pgdb`, () => {
     password,
     database,
     staging,
+    certificatePath,
   }
 })

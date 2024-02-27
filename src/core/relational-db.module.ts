@@ -1,7 +1,9 @@
+import { join } from 'path'
+import { readFileSync } from 'fs'
 import { Module } from '@nestjs/common'
-import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { MulterModule } from '@nestjs/platform-express'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 
 @Module({
   imports: [
@@ -9,11 +11,19 @@ import { MulterModule } from '@nestjs/platform-express'
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         type: `postgres`,
-        ssl: configService.get(`pgdb.staging`) === `prod`,
+        ssl: configService.get(`db.staging`) === `prod`,
         extra: {
           ssl:
-            configService.get(`pgdb.staging`) === `prod`
-              ? { rejectUnauthorized: false }
+            configService.get(`db.staging`) === `prod`
+              ? {
+                  rejectUnauthorized: false,
+                  ca: readFileSync(
+                    join(
+                      process.cwd(),
+                      configService.get(`db.certificatePath`),
+                    ),
+                  ).toString(),
+                }
               : null,
         },
         host: configService.get<string>(`pgdb.host`),
@@ -29,4 +39,4 @@ import { MulterModule } from '@nestjs/platform-express'
     MulterModule.register(),
   ],
 })
-export class PostgreSqlModule {}
+export class RelationalDatabaseModule {}

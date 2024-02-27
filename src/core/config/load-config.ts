@@ -1,4 +1,4 @@
-import pgDatabaseConfig from './postgresDatabase'
+import pgDatabaseConfig from './relationalDatabase'
 import apiConfig from './api'
 import authConfig from './auth'
 import mongoDatabaseConfig from './mongoDatabase'
