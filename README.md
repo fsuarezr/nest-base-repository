@@ -4,6 +4,7 @@
 
 # NestJS Base Template Project
 
+## Getting Started 🚀
 Hey developers! 👋
 
 This template is your launchpad for building awesome NestJS applications. It provides a clean foundation with core and service modules already separated, ready for your customization.
@@ -13,11 +14,6 @@ This template is your launchpad for building awesome NestJS applications. It pro
 - Solid foundation: Separate core and service modules for cleaner code organization.
 - Database options: Pre-configured setups for MongoDB and PostgreSQL/MySQL (pick your poison!).
 - `.env` support: Easily manage environment variables for secrets and configuration.
-
-
-***
-## Getting Started 🚀
-Clone this repository to your local folder.
 
 ***
 ### Prerequisites 📋
