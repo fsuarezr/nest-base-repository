@@ -16,6 +16,14 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@/*": ["src/*"],
+      "@core/*":["src/core/*"],
+      "@entities/*":["src/entities/*"],
+      "@utils/*":["src/utils/*"],
+      "@config/*":["src/core/config/*"],
+      "@auth/*":["src/auth/*"],
+    }
   }
 }
