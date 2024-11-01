@@ -1,8 +1,9 @@
 import { NestFactory } from '@nestjs/core'
 import { ConfigService } from '@nestjs/config'
-import { Logger, ValidationPipe } from '@nestjs/common'
+import { Logger, ValidationPipe, BadRequestException } from '@nestjs/common'
 
-import { AppModule } from './app.module'
+import { AppModule } from '@/app.module'
+import { templateError } from '@utils/Response'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
@@ -22,6 +23,14 @@ async function bootstrap() {
       transform: true,
       transformOptions: {
         enableImplicitConversion: true,
+      },
+      exceptionFactory: (errors) => {
+        const errorsMessages = errors.map(
+          (error) => error.constraints[Object.keys(error.constraints)[0]],
+        )
+        return new BadRequestException(
+          templateError({ code: 400, message: errorsMessages }),
+        )
       },
     }),
   )
