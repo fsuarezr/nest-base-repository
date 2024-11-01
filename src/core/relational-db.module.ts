@@ -26,11 +26,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
                 }
               : null,
         },
-        host: configService.get<string>(`pgdb.host`),
-        port: +configService.get<number>(`pgdb.port`),
-        database: configService.get<string>(`pgdb.database`),
-        username: configService.get<string>(`pgdb.username`),
-        password: configService.get<string>(`pgdb.password`),
+        host: configService.get<string>(`db.host`),
+        port: +configService.get<number>(`db.port`),
+        database: configService.get<string>(`db.database`),
+        username: configService.get<string>(`db.username`),
+        password: configService.get<string>(`db.password`),
         autoLoadEntities: true,
         synchronize: true, // se recomienda tener este valor en true sólo para modo desarrollo
       }),
