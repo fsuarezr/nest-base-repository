@@ -65,8 +65,13 @@ export class UserEntityProvider extends EntityServiceProvider<User> {
    *
    * This method utilizes the findEntityByField method from the base ModelEntityProvider class.
    */
-  async findOneByEmail(email: string) {
-    return this.findEntityByField(`email`, email, `findOneUserByEmail`)
+  async findOneByEmail(email: string, selectOptions) {
+    return this.findEntityByField(
+      `email`,
+      email,
+      `findOneUserByEmail`,
+      selectOptions,
+    )
   }
 
   /**

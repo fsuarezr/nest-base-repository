@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common'
-import { DeepPartial, Repository } from 'typeorm'
+import { DeepPartial, Repository, FindOptionsSelect } from 'typeorm'
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity'
 
 import { handleDBExceptions } from '@utils/databaseException'
@@ -33,12 +33,14 @@ export class EntityServiceProvider<T> {
    * @param field - The field to search by.
    * @param value - The value to match against the field.
    * @param methodName - The name of the method calling this function.
+   * @param selectOptions - Optional fields to include in the result.
    * @returns An object indicating the success status and the found entity or error message.
    */
   async findEntityByField(
     field: keyof T,
     value: valueOfSearch,
     methodName: string,
+    selectOptions: FindOptionsSelect<T> = {},
   ) {
     this.logger.log(``)
     this.logger.log(`==== Method beginning: ${methodName} ====`)
@@ -47,6 +49,7 @@ export class EntityServiceProvider<T> {
     try {
       const entity = await this.repository.findOne({
         where: { [field]: value } as never,
+        select: selectOptions,
       })
 
       this.logger.log(`Validating if entity exists: ${entity != null}`)
@@ -75,11 +78,13 @@ export class EntityServiceProvider<T> {
    * Finds an entity by specified fields and values.
    *
    * @param searchParams - An object where keys are fields and values are the values to match against the fields.
+   * @param selectOptions - Optional fields to include in the result.
    * @param methodName - The name of the method calling this function.
    * @returns An object indicating the success status and the found entity or error message.
    */
   async findEntityMultipleFields(
     searchParams: Partial<Record<keyof T, valueOfSearch>>,
+    selectOptions: FindOptionsSelect<T> = {},
     methodName: string,
   ) {
     this.logger.log(``)
@@ -89,6 +94,7 @@ export class EntityServiceProvider<T> {
     try {
       const entity = await this.repository.findOne({
         where: searchParams as never,
+        select: selectOptions,
       })
 
       this.logger.log(`Validating if entity exists: ${entity != null}`)
